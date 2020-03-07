@@ -2,9 +2,16 @@ const express = require('express');
 const app = express();
 const authRoutes = require('./routes/auth-routes');
 const passportSetup = require('./config/passport-setup');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
 
 // Setting up the view engine
 app.set('view engine', 'ejs');
+
+// connecting to mongodb
+mongoose.connect(keys.mongodb.dbURI, () => {
+  console.log('Connected to mongoDB');
+});
 
 // create home route
 app.get('/', (req, res) => {

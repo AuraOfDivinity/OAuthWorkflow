@@ -8,6 +8,8 @@ router.get('/login', (req, res) => {
 });
 
 // auth with google
+// The first passport authenticate middleware sends the user to the consent screen
+
 router.get(
   '/google',
   passport.authenticate('google', {
@@ -22,7 +24,8 @@ router.get('/logout', (req, res) => {
 });
 
 // callback route to re route to
-router.get('/google/redirect', (req, res) => {
+// the second passport authenticate middleware uses the code returned by google
+router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
   res.send('reached callback URI');
 });
 
