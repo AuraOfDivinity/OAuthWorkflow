@@ -26,7 +26,7 @@ router.get('/logout', (req, res) => {
 // callback route to re route to
 // the second passport authenticate middleware uses the code returned by google
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.send('reached callback URI');
+  res.redirect('/profile');
 });
 
 module.exports = router;
